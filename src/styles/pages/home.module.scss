@@ -1,0 +1,31 @@
+.home {
+    max-width: 1120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6%;
+    height: calc(100vh - 4.5rem);
+
+    .blue {
+        color: var(--cyan-500);
+    }
+
+    section {
+        max-width: 600px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+
+        h1 {
+            font-size: 4.5rem;
+            line-height: 4.5rem;
+            font-weight: 900;
+        }
+
+        span {
+            font-weight:bold;
+        }
+    }
+}
