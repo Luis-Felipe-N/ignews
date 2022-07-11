@@ -1,3 +1,5 @@
+import { useSession, signIn, signOut } from "next-auth/client"
+
 import { useState } from 'react'
 import { FaGithub } from 'react-icons/fa'
 import { FiX } from 'react-icons/fi'
@@ -5,17 +7,23 @@ import { FiX } from 'react-icons/fi'
 import styles from './styles.module.scss'
 
 export function ButtonSingIn() {
-    const [ isUserLoggedIn, setIsUserLoggedIn ] = useState(true)
+    const [ session ] = useSession()
 
+    console.log(session)
 
-    return isUserLoggedIn ? (
-        <button className={styles.buttonsingIn}>
+    return session ? (
+        <button 
+            title="Sair"
+            onClick={() => signOut()}
+            className={styles.buttonsingIn}>
             <FaGithub color="#04d361" />
-            Luis Felipe
+                {session.user.name}
             <FiX /> 
         </button>
     ) : (
-        <button className={styles.buttonsingIn}>
+        <button 
+            onClick={() => signIn()}
+            className={styles.buttonsingIn}>
             <FaGithub color="#eba417" />
             Sing In with GitHub
         </button>

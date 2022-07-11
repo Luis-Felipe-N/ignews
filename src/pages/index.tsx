@@ -9,8 +9,8 @@ interface HomeProps {
   product: {
     priceId: string,
     amount: number
-}
   }
+}
 
 
 export default function Home({ product }: HomeProps ) {
@@ -34,6 +34,7 @@ export default function Home({ product }: HomeProps ) {
         src="/image/avatar.svg"
         width={500}
         height={600}
+        alt=""
        />
     </main>
     </>  

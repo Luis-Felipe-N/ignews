@@ -1,8 +1,10 @@
 .home {
-    max-width: 1120px;
+    max-width: 1300px;
+    width: 100%;
+    margin: auto;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     padding: 0 6%;
     height: calc(100vh - 4.5rem);
 
