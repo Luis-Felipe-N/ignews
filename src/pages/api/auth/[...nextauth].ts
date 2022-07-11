@@ -21,7 +21,7 @@ export default NextAuth({
           query.Not(
             query.Exists(
               query.Match(
-                query.Index('users_by_email'),
+                query.Index('user_by_email'),
                 query.Casefold(email)
               )
             )
