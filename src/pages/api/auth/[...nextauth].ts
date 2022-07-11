@@ -17,17 +17,28 @@ export default NextAuth({
       const { email } = user
 
       fauna.query(
-        query.Create(
-          query.Collection('USERS'),
-          { data: { email } }
-        )
-      ).then((ret) => console.log(ret))
-      .catch((err) => console.error(
-        'Error: [%s] %s: %s',
-        err.name,
-        err.message,
-        err.errors()[0].description,
-      ))
+        query.If(
+          query.Not(
+            query.Exists(
+              query.Match(
+                query.Index('users_by_email'),
+                query.Casefold(email)
+              )
+            )
+          ),
+          query.Create(
+            query.Collection('USERS'),
+            { data: { email } }
+          ),
+          query.Get(
+            query.Match(
+              query.Index('user_by_email'),
+              query.Casefold(email)
+            )
+          )
+        ),
+      ).then(() => true)
+      .catch(() => false)
 
       return true
     },
