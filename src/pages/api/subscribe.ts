@@ -25,6 +25,8 @@ async function subscribe(req: NextApiRequest, res: NextApiResponse) {
 
         let customerId = user.data.stripe_custumer_id
 
+        console.log('Customer id: ' +  customerId)
+
         if (!customerId) {
             const stripeCustomer = await stripe.customers.create({
                 email: session.user.email
@@ -35,7 +37,7 @@ async function subscribe(req: NextApiRequest, res: NextApiResponse) {
                     query.Ref(query.Collection('USERS'), user.ref.id),
                     { 
                         data: {
-                            stripe_custumer_id: customerId,
+                            stripe_custumer_id: stripeCustomer.id,
                         }
                     }
                 )

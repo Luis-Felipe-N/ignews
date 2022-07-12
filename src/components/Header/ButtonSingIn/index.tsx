@@ -9,8 +9,6 @@ import styles from './styles.module.scss'
 export function ButtonSingIn() {
     const [ session ] = useSession()
 
-    console.log(session)
-
     return session ? (
         <button 
             title="Sair"
