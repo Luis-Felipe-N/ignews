@@ -1,7 +1,10 @@
 import { GetStaticProps } from 'next'
+import { useSession } from 'next-auth/client'
+import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
 import Link from 'next/link'
 import { RichText } from 'prismic-dom'
+import { useEffect, useState } from 'react'
 import { createClient } from '../../service/prismicio'
 import style from './style.module.scss'
 
@@ -17,6 +20,15 @@ interface IPostsProps {
 }
 
 export default function Posts({posts}: IPostsProps) {
+    const [hasSubscription, setHasSubscription] = useState(false)
+    const [session] = useSession()
+    const { push } = useRouter()
+    useEffect(() => {
+        if(session?.activeSubscription) {
+            setHasSubscription(true)
+        }
+    }, [session])
+
     return (
         <>
             <Head>
@@ -27,7 +39,7 @@ export default function Posts({posts}: IPostsProps) {
                     {
                         posts &&
                         posts.map(post => (
-                            <Link key={post.uid} href={`/posts/${post.uid}`}>
+                            <Link key={post.uid} href={hasSubscription ? `/posts/${post.uid}` : `/posts/preview/${post.uid}`}>
                                 <a>
                                     <time>{post.date}</time>
                                     <strong>{post.title}</strong>

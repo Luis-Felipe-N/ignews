@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps = async ({req, params, previ
     const session = await getSession({req})
 
     console.log(session)
-    if (!session.activeSubscription) {
+    if (!session?.activeSubscription) {
         return {
             redirect: {
                 destination: '/',
