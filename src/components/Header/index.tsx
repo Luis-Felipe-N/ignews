@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { ActiveLink } from '../ActiveLink'
 
 import { ButtonSingIn } from './ButtonSingIn'
 
@@ -19,12 +20,16 @@ export function Header() {
                 </Link>
 
                 <nav>
-                    <Link href="/">
-                        <a className={styles.active}>Home</a>
-                    </Link>
-                    <Link href="/news">
-                        <a>News</a>
-                    </Link>
+                    <ActiveLink activeClassName={styles.active} href="/">
+                        <a>
+                            Home
+                        </a>
+                    </ActiveLink>
+                    <ActiveLink activeClassName={styles.active} href="/posts" prefetch >
+                        <a>
+                            Posts
+                        </a>
+                    </ActiveLink>
                 </nav>
 
                 <ButtonSingIn />
